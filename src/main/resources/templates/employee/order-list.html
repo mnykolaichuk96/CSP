@@ -63,20 +63,20 @@
     </div>
 </nav>
 <!-- Place for messages: error, alert etc ... -->
-<div class="form-group">
-    <div class="col-xs-15">
-        <div>
-
-            <!-- Check for registration error -->
-            <div th:if="${message}" class="alert alert-success col-xs-offset-1 col-xs-10">
-                <span th:text="${message}"></span>
-            </div>
-
-        </div>
-    </div>
-</div>
 <section class="order-list">
     <div class="container">
+        <div class="form-group">
+            <div class="col-xs-15">
+                <div>
+
+                    <!-- Check for registration error -->
+                    <div th:if="${message}" class="alert alert-success col-xs-offset-1 col-xs-10">
+                        <span th:text="${message}"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <div>
             <table class="table table-striped table-hover">
                 <thead>
@@ -103,7 +103,7 @@
                         <td class="scope">1</td>
                         <td th:text="${orderEmployeeDataIterator.carData.registrationNumber}"/>
                         <td th:text="${orderEmployeeDataIterator.creationDate}"/>
-                        <td th:text="${orderEmployeeDataIterator.description}"/>
+                        <td class="descr" th:text="${orderEmployeeDataIterator.description}"/>
                         <div th:case="'IMPLEMENTATION'">
                         <td  th:text="${orderEmployeeDataIterator.orderAnswerDataList.get(0).workshopData.workshopName}"/>
                         <td th:text="${orderEmployeeDataIterator.orderAnswerDataList.get(0).workshopData.cityName}"/>

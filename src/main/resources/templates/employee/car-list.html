@@ -57,23 +57,20 @@
         </div>
     </div>
 </nav>
-
-<!-- Place for messages: error, alert etc ... -->
-<div class="form-group">
-    <div class="col-xs-15">
-        <div>
-
-            <!-- Check for registration error -->
-            <div th:if="${message}" class="alert alert-success col-xs-offset-1 col-xs-10">
-                <span th:text="${message}"></span>
-            </div>
-
-        </div>
-    </div>
-</div>
-
 <section class="show-existing-car">
     <div class="container">
+        <!-- Place for messages: error, alert etc ... -->
+        <div class="form-group">
+            <div class="col-xs-15">
+                <div>
+                    <!-- Check for registration error -->
+                    <div th:if="${message}" class="alert alert-success col-xs-offset-1 col-xs-10">
+                        <span th:text="${message}"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <div class="mycar-wrapper">
             <th:block th:each="car: ${carDataList}">
                 <div class="mycar-form">
@@ -84,12 +81,11 @@
                         <li class="list-group-item" th:text="${car.registrationNumber}"></li>
                         <li class="list-group-item" th:text="${car.engineType}"></li>
                         <li class="list-group-item" th:text="${car.vin}"></li>
-
                     </ul>
                     <form th:action="@{/employee/deleteCar}"
                           method="POST">
                         <input type="hidden" th:value="${car.id}" name="carId"/>
-                        <button type="submit" class="btn btn-secondary">Delete</button>
+                        <button type="submit" class="btn btn-secondary delete-car-btn">Delete</button>
                     </form>
                 </div>
             </th:block>

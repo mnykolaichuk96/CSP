@@ -1,70 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <link rel="stylesheet" th:href="@{/css/styles.css}">
-        <title>Workshop</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>Workshop</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mb-2 mb-lg-0 justify-content-between w-100">
-                                <li class="nav-item">
-                                        <a class="nav-link" aria-current="page" th:href="@{/workshop/dashboard}">Home</a>
-                                </li>
-                                <div class="center-links d-flex">
-                                        <li class="nav-item">
-                                                <a th:href="@{/workshop/showCompletedOrderList}" type="button" class="nav-link" aria-pressed="true">Back to archiw order list</a>
-                                                <!-- мапінг на контроллер з формаою реєстрації  -->
-                                        </li>
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0 justify-content-between w-100">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" th:href="@{/workshop/dashboard}">Home</a>
+                </li>
+                <div class="center-links d-flex">
+                    <li class="nav-item">
+                        <a th:href="@{/workshop/showCompletedOrderList}" type="button" class="nav-link" aria-pressed="true">Back to archiw order list</a>
+                        <!-- мапінг на контроллер з формаою реєстрації  -->
+                    </li>
 
-                                </div>
-
-                                <li class="nav-item">
-                                        <a th:href="@{/login}" type="button" class="nav-link">LogIn</a>
-                                </li>
-                        </ul>
                 </div>
+
+                <li class="nav-item">
+                    <a th:href="@{/login}" type="button" class="nav-link">LogIn</a>
+                </li>
+            </ul>
         </div>
+    </div>
 </nav>
 
 <section class="order-list">
-        <div class="container">
-                <div>
-                        <table class="table table-striped table-hover">
-                                <thead>
-                                <tr>
+    <div class="container">
+        <div>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
 
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                        <td class="scope">1</td>
-<!--                                        В цьому обєкті всі дані-->
-                                        <td th:text="${orderWorkshopData.description}"/>
-                                        <td th:text="${orderWorkshopData.carData.vin}"/>
-                                        <div th:if="${orderWorkshopData.employeeDetailData != null and orderWorkshopData.employeeDetailData != ''}">
-                                                <td th:text="${orderWorkshopData.employeeDetailData.email}"/>
-                                        </div>
-                                </tr>
-                                </tbody>
-                                <!--                <div style="margin-top: 10px" class="form-group">-->
-                                <!--                    <div class="col-sm-6 controls">-->
-                                <!--                    </div>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="scope">1</td>
+                    <!--                                        В цьому обєкті всі дані-->
+                    <td th:text="${orderWorkshopData.description}"/>
+                    <td th:text="${orderWorkshopData.carData.vin}"/>
+                    <div th:if="${orderWorkshopData.employeeDetailData != null and orderWorkshopData.employeeDetailData != ''}">
+                        <td th:text="${orderWorkshopData.employeeDetailData.email}"/>
+                    </div>
+                </tr>
+                </tbody>
+                <!--                <div style="margin-top: 10px" class="form-group">-->
+                <!--                    <div class="col-sm-6 controls">-->
+                <!--                    </div>-->
 
-                                <!--                </div>-->
-                        </table>
-                </div>
+                <!--                </div>-->
+            </table>
         </div>
+    </div>
 </section>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>

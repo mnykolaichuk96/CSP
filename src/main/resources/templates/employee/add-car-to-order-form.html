@@ -94,10 +94,10 @@
     </div>
 </section>
 
-<section th:if="${carDataList} != null and ${carData.make == null or carData.make == ''}">
-    <!--link na dodanie nowego samochodu do listy moich samochodów-->
-    <a th:href="@{/employee/showAddCarForm}" class="btn btn-secondary addCar-Btn">Add new my car</a>
-</section>
+<!--<section th:if="${carDataList} != null and ${carData.make == null or carData.make == ''}">-->
+<!--    &lt;!&ndash;link na dodanie nowego samochodu do listy moich samochodów&ndash;&gt;-->
+<!--    <a th:href="@{/employee/showAddCarForm}" class="btn btn-secondary addCar-Btn">Add new my car</a>-->
+<!--</section>-->
 
 <section class="add-temporary-car">
     <div class="container">
@@ -109,13 +109,15 @@
             <th:block th:if="${carData.make == null}">
                 <form th:action="@{/employee/processCarMakeChooseToOrder}"
                       method="POST" class="form-horizontal">
-                    <div style="margin-bottom: 25px" class="input-group">
-                        <select name="make">
-                            <option th:each="carMake : ${carMakeList}" th:value="${carMake}" th:text="${carMake}"></option>
-                        </select>
+                    <div class="input-group">
+                        <div class="workshop-form__select-wrapper">
+                            <select name="make" class="form-select">
+                                <option th:each="carMake : ${carMakeList}" th:value="${carMake}" th:text="${carMake}"></option>
+                            </select>
+                            <!-- Submit -->
+                            <button type="submit" class="btn btn-secondary">Choose car make</button>
+                        </div>
                     </div>
-                    <!-- Submit -->
-                    <button type="submit" class="btn btn-secondary">Choose car make</button>
                 </form>
                 <br>
             </th:block>
@@ -126,12 +128,12 @@
                 <!--                    model-->
 
                 <th:block th:if="${carData.make != null}">
-                    <legend class="form-legend"><p th:object="${carData}" th:text="*{make}"/></legend>
+                    <input class="form-control" th:object="${carData}" th:value="*{make}" disabled/></input>
 
                     <input type="hidden" th:field="*{make}"/>
 
                     <!-- Model -->
-                    <div style="margin-bottom: 25px" class="input-group">
+                    <div style="margin: 25px 0" class="input-group">
                         <select th:field="*{model}" class="form-select" aria-label="Default select example">
                             <option th:each="carModel : ${carModelList}" th:value="${carModel}" th:text="${carModel}"></option>
                         </select>
@@ -141,7 +143,6 @@
 
                 <!-- Year -->
                 <div style="margin-bottom: 25px" class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                     <input type="text" th:field="*{year}" placeholder="year (*)" class="form-control" />
                 </div>
                 <div th:if="${#fields.hasErrors('year')}"
@@ -154,7 +155,6 @@
 
                 <!-- vin -->
                 <div style="margin-bottom: 25px" class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input type="text" th:field="*{vin}" placeholder="VIN (*)" class="form-control" />
                 </div>
                 <div th:if="${#fields.hasErrors('vin')}"
@@ -166,7 +166,6 @@
 
                 <!-- Registration number -->
                 <div style="margin-bottom: 25px" class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input type="text" th:text th:field="*{registrationNumber}" placeholder="registrationNumber (*)" class="form-control" />
                 </div>
                 <div th:if="${#fields.hasErrors('registrationNumber')}"
@@ -177,13 +176,19 @@
                 </div>
 
                 <!-- Engine type -->
-                <select th:field="*{engineType}" class="form-select" aria-label="Default select example">
+                <select th:field="*{engineType}" class="form-select engine-type" aria-label="Default select example">
                     <option th:each="i : ${T(com.mnykolaichuk.luv2code.springboot.thymeleafdemo.model.enums.EngineType).values()}"
                             th:value="${i}" th:text="${i}"></option>
                 </select>
 
                 <!-- Add Button -->
-                <button type="submit" class="btn btn-secondary">Add Car</button>
+                <div class="add-temporary-car__btn-wrapper">
+                    <button type="submit" class="btn btn-secondary">Add Car</button>
+                    <section th:if="${carDataList} != null and ${carData.make == null or carData.make == ''}">
+                        <!--link na dodanie nowego samochodu do listy moich samochodów-->
+                        <a th:href="@{/employee/showAddCarForm}" class="btn btn-secondary addCar-Btn">Add new my car</a>
+                    </section>
+                </div>
             </form>
         </div>
     </div>

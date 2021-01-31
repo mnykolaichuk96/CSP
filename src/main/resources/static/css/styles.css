@@ -15,6 +15,12 @@ nav {
     position: relative;
 }
 
+nav ul li.logout-item input {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
 .nav-link {
     font-size: 20px;
     font-weight: 400;
@@ -30,6 +36,10 @@ nav {
 .divider {
     color: rgba(255,255,255,.55);
     font-size: 18px;
+}
+
+form li {
+    list-style-type: none;
 }
 
 .offer-right-side {
@@ -75,6 +85,10 @@ nav {
     background: linear-gradient(180deg, #dee2e6 0%, rgba(108,117,125,1) 100%);
 }
 
+.add-existing-car .mycar-wrapper {
+    margin-top: 50px;
+}
+
 .hidden {
     display: none;
 }
@@ -88,7 +102,6 @@ nav {
     width: 250px;
     padding: 12px;
     border-radius: 10px;
-    margin: 30px 0;
 }
 
 .mycar-form li {
@@ -96,7 +109,8 @@ nav {
     border-bottom: 1px solid #c3c9d0;
 }
 
-.mycar-form ul {
+.mycar-form ul,
+.workshop-form ul {
     padding: 0;
     margin: 0;
 }
@@ -120,15 +134,30 @@ nav {
     border: none;
 }
 
+.show-existing-car {
+    padding: 50px 0;
+}
+
+.show-existing-car .delete-car-btn {
+    margin-top: 15px;
+}
+
+.workshop-form .form-select {
+    width: 150px;
+}
+
+.show-existing-car .form-floating {
+    margin-top: 5px;
+}
+
 .show-existing-car .mycar-form {
-    margin-top: 50px;
+    /*margin-top: 50px;*/
 }
 
 
 .mycar-wrapper {
     display: flex;
     justify-content: space-around;
-    /*margin-top: 30px;*/
     flex-wrap: wrap;
 }
 
@@ -145,6 +174,15 @@ nav {
     padding: 50px 0;
 }
 
+.add-temporary-car__btn-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-temporary-car .workshop-form .add-temporary-car__btn-wrapper button {
+    margin: 0 !important;
+}
+
 .workshop-form {
     width: 420px;
     background-color: #fff;
@@ -153,15 +191,29 @@ nav {
     margin: 0 auto;
 }
 
-.workshop-form .form-select {
-    width: 130px;
+.workshop-form .engine-type {
     margin-top: 5px;
     margin-bottom: 25px;
 }
 
+.workshop-form .workshop-form__select-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.workshop-form .workshop-form__select-wrapper button {
+    margin: 0 !important;
+}
+
 .workshop-form button {
+    width: 150px;
     display: block;
     margin: 0 auto;
+}
+
+.workshop-form li {
+    margin-top: 10px;
 }
 
 .add-new-car {
@@ -178,6 +230,10 @@ nav {
 
 .order-list table td:last-child {
     text-align: end;
+}
+
+.order-list table button {
+    font-size: 14px;
 }
 
 .user-page {
@@ -257,7 +313,7 @@ nav {
 
 .registration .workshop-form button {
     margin-top: 30px;
-    width: 140px;
+    /*width: 140px;*/
 }
 
 .create-order {
@@ -294,24 +350,31 @@ nav {
     border-radius: 7px;
     background-color: #212529;
     border-color: #212529;
-    width: 250px;
+    width: 270px;
     margin: 0 auto;
     margin-top: 94px;
 }
 
-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 55px;
-    background-color: #212529;
-    margin-top: 40px;
-    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.582);
+table td.descr {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
 
-footer p {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    color: #fff;
-}
+/*footer {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 55px;*/
+/*    background-color: #212529;*/
+/*    margin-top: 40px;*/
+/*    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.582);*/
+/*}*/
+
+/*footer p {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    color: #fff;*/
+/*}*/
