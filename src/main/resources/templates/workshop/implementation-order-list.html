@@ -71,8 +71,6 @@
                     <th scope="col">Last Name</th>
                     <th scope="col">Phone Number</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th/>
                 </tr>
                 </thead>
                 <tbody>
@@ -93,23 +91,25 @@
                         <td/>
                     </div>
                     <td>
-                        <form th:action="@{/workshop/showImplementationOrderListOptions}"
-                              method="POST"
-                              class="form-horizontal">
-                            <input type="hidden" th:value="${orderWorkshopDataIterator.orderAnswerId}" name="orderAnswerId"/>
-                            <button type="submit" class="btn btn-secondary">Options</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form th:action="@{/workshop/processOrderCompleted}"
-                              method="POST"
-                              class="form-horizontal">
+                        <div class="btns-wrapper">
+                            <form th:action="@{/workshop/showImplementationOrderListOptions}"
+                                  method="POST"
+                                  class="form-horizontal">
+                                <input type="hidden" th:value="${orderWorkshopDataIterator.orderAnswerId}" name="orderAnswerId"/>
+                                <button type="submit" class="btn btn-secondary">Options</button>
+                            </form>
+                            <form th:action="@{/workshop/processOrderCompleted}"
+                                  method="POST"
+                                  class="form-horizontal">
 
-                            <input type="hidden" th:value="${orderWorkshopDataIterator.orderAnswerId}" name="orderAnswerId"/>
+                                <input type="hidden" th:value="${orderWorkshopDataIterator.orderAnswerId}" name="orderAnswerId"/>
 
-                            <button type="submit" class="btn btn-secondary">Completed</button>
-                        </form>
+                                <button type="submit" class="btn btn-secondary">Completed</button>
+                            </form>
+                        </div>
+
                     </td>
+
                 </tr>
                 </tbody>
                 <!--                <div style="margin-top: 10px" class="form-group">-->

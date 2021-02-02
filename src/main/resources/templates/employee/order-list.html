@@ -78,21 +78,19 @@
             </div>
         </div>
         <div>
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover archiw-table">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Registration</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Workshop Name</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Phone number</th>
-                    <th scope="col">Implementation date</th>
-                    <th scope="col">Price</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Registration</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Workshop Name</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Phone number</th>
+                        <th scope="col">Implementation date</th>
+                        <th scope="col" colspan="3">Price</th>
+                    </tr>
                 </thead>
                 <tbody>
                 <tr th:each="orderEmployeeDataIterator : ${orderEmployeeDataList}">
@@ -102,33 +100,36 @@
                           th:switch="${orderEmployeeDataIterator.orderAnswerDataList.get(0).stan.toString()}">
                         <td class="scope">1</td>
                         <td th:text="${orderEmployeeDataIterator.carData.registrationNumber}"/>
-                        <td th:text="${orderEmployeeDataIterator.creationDate}"/>
+                        <td th:text="${orderEmployeeDataIterator.creationDate}" style="min-width: 150px;"/>
                         <td class="descr" th:text="${orderEmployeeDataIterator.description}"/>
                         <div th:case="'IMPLEMENTATION'">
-                        <td  th:text="${orderEmployeeDataIterator.orderAnswerDataList.get(0).workshopData.workshopName}"/>
-                        <td th:text="${orderEmployeeDataIterator.orderAnswerDataList.get(0).workshopData.cityName}"/>
-                        <td th:text="${orderEmployeeDataIterator.orderAnswerDataList.get(0).workshopData.phoneNumber}"/>
-                        <td th:text="${orderEmployeeDataIterator.orderAnswerDataList.get(0).implementationDate}"/>
-                        <td th:text="${orderEmployeeDataIterator.orderAnswerDataList.get(0).price}"/>
+                            <td  th:text="${orderEmployeeDataIterator.orderAnswerDataList.get(0).workshopData.workshopName}"/>
+                            <td th:text="${orderEmployeeDataIterator.orderAnswerDataList.get(0).workshopData.cityName}"/>
+                            <td th:text="${orderEmployeeDataIterator.orderAnswerDataList.get(0).workshopData.phoneNumber}"/>
+                            <td th:text="${orderEmployeeDataIterator.orderAnswerDataList.get(0).implementationDate}"/>
+                            <td th:text="${orderEmployeeDataIterator.orderAnswerDataList.get(0).price}"/>
+                            <td th:if="${orderEmployeeDataIterator.orderAnswerDataList.get(0).stan.toString() != 'UNREGISTERED'}">
+                            </td>
                         </div>
                         <div th:case="*">
                             <td/>
                             <td/>
                             <td/>
                             <td/>
+                            <td/>
 
-                        <td th:if="${orderEmployeeDataIterator.orderAnswerDataList.get(0).stan.toString() != 'UNREGISTERED'}">
-                            <input type="hidden" th:value="${orderEmployeeDataIterator.orderId}" name="orderId"/>
-                            <button type="submit" class="btn btn-secondary">Oferty</button>
-                        </td>
+                            <td th:if="${orderEmployeeDataIterator.orderAnswerDataList.get(0).stan.toString() != 'UNREGISTERED'}">
+                                <div class="btns-wrapper">
+                                    <input type="hidden" th:value="${orderEmployeeDataIterator.orderId}" name="orderId"/>
+                                    <button type="submit" class="btn btn-secondary offer-btn">Oferty</button>
+                                    <form th:action="@{/employee/deleteOrder}" method="POST">
+                                        <input type="hidden" th:object="${orderEmployeeData}" th:value="${orderEmployeeDataIterator.orderId}" name="orderId"/>
+                                        <button type="submit" class="btn btn-secondary delete-btn" style="margin-left: 20px;">Delete</button>
+                                    </form>
+                                </div>
+                            </td>
                         </div>
                     </form>
-                        <td>
-                            <form th:action="@{/employee/deleteOrder}" method="POST">
-                                <input type="hidden" th:object="${orderEmployeeData}" th:value="${orderEmployeeDataIterator.orderId}" name="orderId"/>
-                                <button type="submit" class="btn btn-secondary">Delete</button>
-                            </form>
-                        </td>
                 </tr>
                 </tbody>
                 <!--                <div style="margin-top: 10px" class="form-group">-->

@@ -46,18 +46,18 @@
 <section class="show-existing-car">
     <div class="container">
         <div class="mycar-wrapper">
-            <div class="mycar-form">
+            <div class="workshop-form">
                 <form th:action="@{/processCreateOrder}"
                       th:object="${orderWorkshopData}" method="POST">
                     <legend class="form-legend">Wybrany samochód</legend>
 
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><p th:object="${orderWorkshopData.carData}" th:text="*{make}"/></li>
-                        <li class="list-group-item"><p th:object="${orderWorkshopData.carData}" th:text="*{model}"/></li>
-                        <li class="list-group-item"><p th:object="${orderWorkshopData.carData}" th:text="*{year}"/></li>
-                        <li class="list-group-item"><p th:object="${orderWorkshopData.carData}" th:text="*{engineType}"/></li>
-                        <li class="list-group-item"><p th:object="${orderWorkshopData.carData}" th:text="*{registrationNumber}"/></li>
-                        <li class="list-group-item"><p th:object="${orderWorkshopData.carData}" th:text="*{vin}"/></li>
+                        <li class="list-group-item" th:object="${orderWorkshopData.carData}" th:text="*{make}"></li>
+                        <li class="list-group-item" th:object="${orderWorkshopData.carData}" th:text="*{model}"></li>
+                        <li class="list-group-item" th:object="${orderWorkshopData.carData}" th:text="*{year}"></li>
+                        <li class="list-group-item" th:object="${orderWorkshopData.carData}" th:text="*{engineType}"></li>
+                        <li class="list-group-item" th:object="${orderWorkshopData.carData}" th:text="*{registrationNumber}"></li>
+                        <li class="list-group-item" th:object="${orderWorkshopData.carData}" th:text="*{vin}"></li>
                         <input type="hidden" th:object="${orderWorkshopData.carData}" th:field="*{make}"/>
                         <input type="hidden" th:object="${orderWorkshopData.carData}" th:field="*{model}"/>
                         <input type="hidden" th:object="${orderWorkshopData.carData}" th:field="*{year}"/>
@@ -69,8 +69,8 @@
                     <th:block th:object="${employeeDetailData}">
                         <!-- First name -->
                         <div class="form-floating">
-                            <label for="firstName" class="form-label">First Name</label>
                             <input type="text" id="firstName" th:field="*{firstName}" placeholder="first name (*)" class="form-control" th:errorclass="fieldError" />
+                            <label for="firstName" class="form-label">First Name</label>
                         </div>
                         <div th:if="${#fields.hasErrors('firstName')}"
                              style="margin-bottom: 25px" class="text-danger">
@@ -82,8 +82,8 @@
 
                         <!-- Last name -->
                         <div class="form-floating">
-                            <label for="lastName" class="form-label">Last Name</label>
                             <input type="text" id = "lastName" th:field="*{lastName}" placeholder="last name (*)" class="form-control" th:errorclass="fieldError" />
+                            <label for="lastName" class="form-label">Last Name</label>
                         </div>
                         <div th:if="${#fields.hasErrors('lastName')}"
                              style="margin-bottom: 25px" class="text-danger">
@@ -94,8 +94,8 @@
                         <br>
                         <!-- Email -->
                         <div class="form-floating">
-                            <label for="email" class="form-label">Email</label>
                             <input type="text" id="email" th:field="*{email}" placeholder="email (*)" class="form-control" th:errorclass="fieldError" />
+                            <label for="email" class="form-label">Email</label>
                         </div>
                         <div th:if="${#fields.hasErrors('email')}"
                              style="margin-bottom: 25px" class="text-danger">
@@ -106,8 +106,8 @@
                         <br>
                         <!-- Phone number -->
                         <div class="form-floating">
-                            <label for="phoneNumber" class="form-label">Phone Number</label>
                             <input type="text" id="phoneNumber" th:field="*{phoneNumber}" placeholder="phone number (*)" class="form-control" th:errorclass="fieldError" />
+                            <label for="phoneNumber" class="form-label">Phone Number</label>
                         </div>
                         <div th:if="${#fields.hasErrors('phoneNumber')}"
                              style="margin-bottom: 25px" class="text-danger">

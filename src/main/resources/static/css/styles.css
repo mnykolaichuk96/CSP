@@ -42,6 +42,46 @@ form li {
     list-style-type: none;
 }
 
+.home {
+    padding: 50px 0;
+    background-color: #f8f9fa;
+}
+
+.home .card {
+    border: none;
+}
+
+.cities {
+    padding: 50px 0;
+}
+
+.cities .title {
+    text-align: center;
+    font-size: 40px;
+    text-transform: uppercase;
+}
+
+.cities-wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 80px;
+}
+
+.cities .city-item {
+    width: 230px;
+    transform: skewX(-16deg);
+    padding: 25px 35px 16px 35px;
+    background-color: #212529;
+    margin-top: 20px;
+}
+
+.cities-wrapper p {
+    color: #f8f9fa;
+    font-size: 32px;
+    transform: skewX(16deg);
+    text-align: center;
+}
+
 .offer-right-side {
     padding: 2rem;
 }
@@ -228,9 +268,9 @@ form li {
     vertical-align: middle;
 }
 
-.order-list table td:last-child {
-    text-align: end;
-}
+/*.order-list table td:last-child {*/
+/*    text-align: end;*/
+/*}*/
 
 .order-list table button {
     font-size: 14px;
@@ -255,16 +295,24 @@ form li {
 }
 
 .user-page .card .card-body {
-    text-align: center;
+    display: flex;
+    justify-content: center;
     padding: 0;
 }
 
+.user-page .card-content-wrapper {
+    position: absolute;
+    top: 20%;
+}
+
 .user-page .card .card-body a {
+    position: absolute;
     width: 100%;
     border-radius: 0;
-    margin-top: 22px;
     height: 48px;
     font-size: 22px;
+    left: 0;
+    bottom: 0;
 }
 
 .user-page__table {
@@ -280,8 +328,8 @@ form li {
     padding: 0;
 }
 
-.user-page__table table tr:nth-child(4) {
-    border-bottom: 2px solid #6c757d;
+.user-page__table table tr:last-child {
+    border-top: 2px solid #6c757d;
 }
 
 .user-update {
@@ -319,7 +367,7 @@ form li {
 .create-order {
     min-height: 450px;
     background: url(../img/order-bg.jpg) center center/cover no-repeat;
-    padding: 100px 0 30px 0;
+    padding: 50px 0;
 }
 
 .create-order__title {
@@ -329,7 +377,7 @@ form li {
 }
 
 .create-order__wrapper {
-
+    margin-top: 50px;
 }
 
 .create_order__desrc {
@@ -362,19 +410,37 @@ table td.descr {
     max-width: 200px;
 }
 
-/*footer {*/
+/*table.archiw-table td:last-child {*/
 /*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    height: 55px;*/
-/*    background-color: #212529;*/
-/*    margin-top: 40px;*/
-/*    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.582);*/
+/*    justify-content: flex-end;*/
 /*}*/
 
-/*footer p {*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    display: flex;*/
-/*    color: #fff;*/
-/*}*/
+table td button {
+    width: 100px;
+}
+
+.btns-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btns-wrapper button {
+    margin-left: 15px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    background-color: #212529;
+    margin-top: 40px;
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.582);
+}
+
+footer div {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    color: #fff;
+}

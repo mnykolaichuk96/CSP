@@ -48,9 +48,11 @@
     <div class="container">
         <div class="user-page__content" th:object="${workshopData}">
             <div class="card">
-                <img src="../img/avatar.png" class="card-img-top" alt="avatar">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${workshopData.username}"></h5>
+                    <div class="card-content-wrapper">
+                        <img src="../img/avatar.png" class="card-img-top" alt="avatar">
+                        <h5 class="card-title" th:text="${workshopData.username}"></h5>
+                    </div>
                     <a th:href="@{/workshop/showOption}" class="btn btn-secondary" role="button" aria-pressed="true">Show data</a>
                 </div>
             </div>

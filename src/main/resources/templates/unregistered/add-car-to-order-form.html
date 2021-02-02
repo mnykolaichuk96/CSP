@@ -34,7 +34,6 @@
                         <!--  мапінг на контроллер з формаою реєстрації  &ndash;&gt; -->
                     </li>
                 </div>
-                </div>
 
                 <li class="nav-item">
                     <a th:href="@{/login}" type="button" class="nav-link">LogIn</a>
@@ -47,18 +46,20 @@
 <section class="add-new-car">
     <div class="container">
         <div class="workshop-form">
+            <legend class="form-legend">Add car</legend>
             <!-- Choose make form -->
             <th:block th:if="${carData.make == null or carData.make == ''}">
                 <form th:action="@{/processCarMakeChooseToOrder}"
                       method="POST" class="form-horizontal">
-                    <legend class="form-legend">Add car</legend>
-                    <div style="margin-bottom: 25px" class="input-group">
-                        <select name="make">
-                            <option th:each="carMake : ${carMakeList}" th:value="${carMake}" th:text="${carMake}"></option>
-                        </select>
+                    <div class="input-group">
+                        <div class="workshop-form__select-wrapper">
+                            <select name="make" class="form-select">
+                                <option th:each="carMake : ${carMakeList}" th:value="${carMake}" th:text="${carMake}"></option>
+                            </select>
+                            <!-- Submit -->
+                            <button type="submit" class="btn btn-secondary">Choose car make</button>
+                        </div>
                     </div>
-                    <!-- Submit -->
-                    <button type="submit" class="btn btn-secondary">Choose car make</button>
                 </form>
                 <br>
             </th:block>
@@ -70,10 +71,11 @@
                 <input type="hidden" th:field="*{make}"/>
                 <!-- car make -->
                 <th:block th:if="${carModelList != null and carData.make != ''}">
-                    <legend class="form-legend">Add new car<br><p th:object="${carData}" th:text="*{make}"/></legend>
+<!--                    <legend class="form-legend">Add new car<br><p th:object="${carData}" th:text="*{make}"/></legend>-->
+                    <input class="form-control" th:object="${carData}" th:value="*{make}" disabled/></input>
 
                     <!-- Model -->
-                    <div style="margin-bottom: 25px" class="input-group">
+                    <div style="margin: 25px 0" class="input-group">
                         <select th:field="*{model}" class="form-select" aria-label="Default select example">
                             <option th:each="carModel : ${carModelList}" th:value="${carModel}" th:text="${carModel}"></option>
                         </select>
@@ -119,7 +121,7 @@
                 </div>
 
                 <!-- Engine type -->
-                <select th:field="*{engineType}" class="form-select" aria-label="Default select example">
+                <select th:field="*{engineType}" class="form-select engine-type" aria-label="Default select example">
                     <option th:each="i : ${T(com.mnykolaichuk.luv2code.springboot.thymeleafdemo.model.enums.EngineType).values()}"
                             th:value="${i}" th:text="${i}"></option>
                 </select>

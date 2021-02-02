@@ -85,8 +85,6 @@
                     <th scope="col">Data Realizacji</th>
                     <th scope="col">Cena</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -123,7 +121,7 @@
                                     </div>
 
                                 </td>
-                                <td>
+                                <td style="width: 112px;">
                                     <!-- price -->
                                     <div class="input-group">
 <!--                                        <label for="price" class="form-label">Cena</label>-->
@@ -137,31 +135,32 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="form-group">
-                                        <div class="col-sm-6 controls">
-                                            <button type="submit" class="btn btn-secondary">Zaproponować Ofertę</button>
-                                        </div>
+                                    <div class="btns-wrapper">
+                                        <button type="submit" class="btn btn-secondary">Offer</button>
+                                        <form th:action="@{/workshop/showCreatedOrderListOptions}" method="POST" class="form-horizontal">
+                                            <input type="hidden" th:value="${orderWorkshopDataIterator.orderAnswerId}" name="orderAnswerId"/>
+                                            <button type="submit" class="btn btn-secondary">Options</button>
+                                        </form>
+                                        <form th:action="@{/workshop/deleteOrder}" method="POST" class="form-horizontal">
+                                            <input type="hidden" th:value="${orderWorkshopDataIterator.orderAnswerId}" name="orderAnswerId"/>
+                                            <button type="submit" class="btn btn-secondary">Delete</button>
+                                        </form>
                                     </div>
+
                                 </td>
                             </form>
-                            <td>
-                                <form th:action="@{/workshop/showCreatedOrderListOptions}" method="POST" class="form-horizontal">
-                                    <input type="hidden" th:value="${orderWorkshopDataIterator.orderAnswerId}" name="orderAnswerId"/>
-                                    <button type="submit" class="btn btn-secondary">options</button>
-                                </form>
-                            </td>
+<!--                            <td>-->
+<!--                                -->
+<!--                            </td>-->
                             <td th:if="${orderWorkshopDataIterator.orderAnswerData.stan.toString() == 'UNREGISTERED'}">
                                 <form th:action="@{/workshop/processOrderCompleted}" method="POST" class="form-horizontal">
                                     <input type="hidden" th:value="${orderWorkshopDataIterator.orderAnswerId}" name="orderAnswerId"/>
                                     <button type="submit" class="btn btn-secondary">completed</button>
                                 </form>
                             </td>
-                            <td style="min-width: 130px;">
-                                <form th:action="@{/workshop/deleteOrder}" method="POST" class="form-horizontal">
-                                    <input type="hidden" th:value="${orderWorkshopDataIterator.orderAnswerId}" name="orderAnswerId"/>
-                                    <button type="submit" class="btn btn-secondary">delete order</button>
-                                </form>
-                            </td>
+<!--                            <td style="min-width: 130px;">-->
+<!--                                -->
+<!--                            </td>-->
                         </div>
                     </tr>
 

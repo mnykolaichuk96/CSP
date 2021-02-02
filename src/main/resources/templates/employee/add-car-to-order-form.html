@@ -103,9 +103,7 @@
     <div class="container">
         <div class="workshop-form">
             <legend class="form-legend">Add car now</legend>
-
             <!-- Choose make form -->
-
             <th:block th:if="${carData.make == null}">
                 <form th:action="@{/employee/processCarMakeChooseToOrder}"
                       method="POST" class="form-horizontal">

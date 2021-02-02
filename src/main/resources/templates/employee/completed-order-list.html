@@ -65,7 +65,7 @@
 <section class="order-list">
         <div class="container">
                 <div>
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover archiw-table">
                                 <thead>
                                 <tr>
                                         <th scope="col">#</th>
@@ -76,8 +76,7 @@
                                         <th scope="col">Workshop Name</th>
                                         <th scope="col">Phone Number</th>
                                         <th scope="col"></th>
-                                        <th scope="col"></th>
-                                        <th/>
+<!--                                        <th scope="col"></th>-->
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -96,17 +95,20 @@
                                                 <td/>
                                         </th:block>
                                         <td>
-                                                <form th:action="@{/employee/showCompletedOrderListOptions}" method="POST">
-                                                        <input type="hidden" th:value="${orderEmployeeDataIterator.orderId}" name="orderId"/>
-                                                        <button type="submit" class="btn btn-secondary">Options</button>
-                                                </form>
+                                                <div class="btns-wrapper">
+                                                        <form th:action="@{/employee/showCompletedOrderListOptions}" method="POST">
+                                                                <input type="hidden" th:value="${orderEmployeeDataIterator.orderId}" name="orderId"/>
+                                                                <button type="submit" class="btn btn-secondary">Options</button>
+                                                        </form>
+                                                        <form th:action="@{/employee/deleteOrder}" method="POST">
+                                                                <input type="hidden" th:value="${orderEmployeeDataIterator.orderId}" name="orderId"/>
+                                                                <button type="submit" class="btn btn-secondary">Delete</button>
+                                                        </form>
+                                                </div>
                                         </td>
-                                        <td>
-                                                <form th:action="@{/employee/deleteOrder}" method="POST">
-                                                        <input type="hidden" th:value="${orderEmployeeDataIterator.orderId}" name="orderId"/>
-                                                        <button type="submit" class="btn btn-secondary">Delete</button>
-                                                </form>
-                                        </td>
+<!--                                        <td>-->
+<!--                                                -->
+<!--                                        </td>-->
                                 </tr>
                                 </tbody>
                                 <!--                <div style="margin-top: 10px" class="form-group">-->
