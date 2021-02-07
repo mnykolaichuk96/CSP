@@ -100,7 +100,7 @@
                     <td th:text="${orderAnswerData.workshopData.phoneNumber}"/>
                     <td  th:text="${orderAnswerData.implementationDate}"/>
                     <td  th:text="${orderAnswerData.price}"/>
-                    <td>
+                    <td style="text-align: end;">
                         <form th:action="@{/employee/processOrderForImplementationChoose}" method="POST">
                             <input type="hidden" th:value="${orderAnswerData.orderAnswerId}" name="orderAnswerId"/>
                             <button type="submit" class="btn btn-secondary">Wybrać warsztat</button>

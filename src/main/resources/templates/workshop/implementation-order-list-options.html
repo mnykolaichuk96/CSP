@@ -37,32 +37,32 @@
         </div>
 </nav>
 
-<section class="order-list">
+<section class="order-list-option">
         <div class="container">
-                <div>
-                        <table class="table table-striped table-hover">
-                                <thead>
-                                <tr>
-
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                        <td class="scope">1</td>
-<!--                                        В цьому обєкті всі дані-->
-                                        <td th:text="${orderWorkshopData.description}"/>
-                                        <td th:text="${orderWorkshopData.carData.vin}"/>
-                                        <div th:if="${orderWorkshopData.employeeDetailData != null and orderWorkshopData.employeeDetailData != ''}">
-                                                <td th:text="${orderWorkshopData.employeeDetailData.email}"/>
-                                        </div>
-                                </tr>
-                                </tbody>
-                                <!--                <div style="margin-top: 10px" class="form-group">-->
-                                <!--                    <div class="col-sm-6 controls">-->
-                                <!--                    </div>-->
-
-                                <!--                </div>-->
-                        </table>
+                <div class="order-details">
+                        <div class="order-details__table">
+                                <table class="table table-striped table-hover">
+                                        <tbody>
+                                        <tr>
+                                                <th scope="row">VIN</th>
+                                                <td th:text="${orderWorkshopData.carData.vin}"/>
+                                        </tr>
+                                        <tr>
+                                                <th scope="row">Email</th>
+                                                <div th:if="${orderWorkshopData.employeeDetailData != null and orderWorkshopData.employeeDetailData != ''}">
+                                                        <td th:text="${orderWorkshopData.employeeDetailData.email}"/>
+                                                </div>
+                                                <!--                                        В цьому обєкті всі дані-->
+                                                <!--                        <td th:text="${orderEmployeeData.description}"/>-->
+                                                <!--                        <td th:text="${orderEmployeeData.carData.vin}"/>-->
+                                        </tr>
+                                        </tbody>
+                                </table>
+                        </div>
+                        <div class="order-details-description">
+                                <h2>Description</h2>
+                                <div th:text="${orderWorkshopData.description}"></div>
+                        </div>
                 </div>
         </div>
 </section>

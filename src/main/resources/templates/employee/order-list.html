@@ -117,14 +117,13 @@
                             <td/>
                             <td/>
                             <td/>
-
                             <td th:if="${orderEmployeeDataIterator.orderAnswerDataList.get(0).stan.toString() != 'UNREGISTERED'}">
                                 <div class="btns-wrapper">
                                     <input type="hidden" th:value="${orderEmployeeDataIterator.orderId}" name="orderId"/>
                                     <button type="submit" class="btn btn-secondary offer-btn">Oferty</button>
                                     <form th:action="@{/employee/deleteOrder}" method="POST">
                                         <input type="hidden" th:object="${orderEmployeeData}" th:value="${orderEmployeeDataIterator.orderId}" name="orderId"/>
-                                        <button type="submit" class="btn btn-secondary delete-btn" style="margin-left: 20px;">Delete</button>
+                                        <button type="submit" class="btn btn-secondary delete-btn">Delete</button>
                                     </form>
                                 </div>
                             </td>

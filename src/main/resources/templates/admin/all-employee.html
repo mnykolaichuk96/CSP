@@ -86,7 +86,7 @@
                     <td th:text="${employeeDataListIterator.lastName}"/>
                     <td th:text="${employeeDataListIterator.email}"/>
                     <td th:text="${employeeDataListIterator.phoneNumber}"/>
-                    <td>
+                    <td style="text-align: end;">
                         <form th:action="@{/admin/deleteEmployee}" method="POST">
                             <input type="hidden" th:object="${employeeDataListIterator}" th:value="${employeeDataListIterator.employeeId}" name="employeeId"/>
                             <button type="submit" class="btn btn-secondary">Delete</button>

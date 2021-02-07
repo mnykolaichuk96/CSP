@@ -428,6 +428,26 @@ table td button {
     margin-left: 15px;
 }
 
+.order-list-option {
+    padding: 30px 0;
+}
+
+.order-details {
+    display: flex;
+    width: 673px;
+    margin: 0 auto;
+}
+
+.order-details__table {
+    margin-right: 50px;
+    padding-top: 38px;
+}
+
+.order-details-description h2 {
+    border-bottom: 2px solid #6c757d;
+    padding-left: 20px;
+}
+
 footer {
     display: flex;
     justify-content: center;

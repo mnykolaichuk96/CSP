@@ -97,7 +97,7 @@
                     <td th:text="${carModelDataListIterator.model}"/>
                     <td th:text="${carModelDataListIterator.carInSystemCount}"/>
 
-                    <td>
+                    <td style="text-align: end;">
                         <form th:action="@{/admin/deleteCarModel}" method="POST">
                             <input type="hidden" th:value="${carModelDataListIterator.modelId}" name="modelId"/>
                             <button type="submit" class="btn btn-secondary">Delete</button>

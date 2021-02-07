@@ -90,29 +90,29 @@
                 </tr>
                 </thead>
                 <tbody>
+                <tr>
+                    <td>#</td>
+                    <form th:action="@{/admin/processAddCity}" method="POST">
+                        <td>
+                            <input type="text" name="cityName" class="form-control" placeholder="City name">
+                        </td>
+                        <td></td>
+                        <td style="text-align: end;">
+                            <button type="submit" class="btn btn-secondary">Add City</button>
+                        </td>
+                    </form>
+                </tr>
                 <tr th:each="cityDataListIterator : ${cityDataList}">
                     <td class="scope">1</td>
                     <td th:text="${cityDataListIterator.cityName}"/>
                     <td th:text="${cityDataListIterator.workshopCount}"/>
 
-                    <td>
+                    <td style="text-align: end;">
                         <form th:action="@{/admin/deleteCity}" method="POST">
                             <input type="hidden" th:value="${cityDataListIterator.cityId}" name="cityId"/>
                             <button type="submit" class="btn btn-secondary">Delete</button>
                         </form>
                     </td>
-                </tr>
-                <tr>
-                    <td>#</td>
-                    <form th:action="@{/admin/processAddCity}" method="POST">
-                        <td>
-                            <input type="text" name="cityName">
-                        </td>
-                        <td>
-                            <button type="submit" class="btn btn-secondary">Add City</button>
-                        </td>
-
-                    </form>
                 </tr>
                 </tbody>
                 <!--                <div style="margin-top: 10px" class="form-group">-->
