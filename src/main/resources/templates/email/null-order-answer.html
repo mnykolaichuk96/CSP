@@ -162,7 +162,7 @@
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                             <td class="logo" style="text-align: center;">
-                                <h1>Welcome</h1>
+                                <h1>Dzień dobry, <span th:text="${customerDetailData.firstName}"/> <span th:text="${customerDetailData.firstName}"/>.</h1>
                             </td>
                         </tr>
                     </table>
@@ -174,8 +174,18 @@
                         <tr>
                             <td>
                                 <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                    <h2>Sory but you order created <span th:text="${order.creationDate}"/> with description <span th:text="${order.description}"/> for car
-                                        <span th:text="${order.car.registrationNumber}"/>  was deleted because no one workshop answer.</h2>
+                                    <h2>
+                                        Niestety na temat zlecenia od <span th:text="${orderWorkshopData.creationDate}"/> na naprawę samochodu
+
+                                        <span th:text="${orderWorkshopData.carData.make}"/> <span th:text="${orderWorkshopData.carData.model}"/>
+                                        <br>
+                                        o numerze rejestracyjnym: <span th:text="${orderWorkshopData.carData.registrationNumber}"/>
+                                        <br>
+                                        nie ma odpowiedzi od warsztatów samochodowych.
+                                        <br>
+                                        Zlecenie znajduje się w liście zrealizowanych i dostępne pod linkiem:
+                                    </h2>
+                                    <p><a th:href="${showCompletedOrderListUrl}" class="btn btn-primary">Zrealizowane zlecenia</a></p>
                                 </div>
                             </td>
                         </tr>

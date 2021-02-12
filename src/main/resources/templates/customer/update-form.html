@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	<title>iremont.pl</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mb-2 mb-lg-0 justify-content-between w-100">
+				<li class="nav-item">
+					<a class="nav-link" aria-current="page" th:href="@{/customer/dashboard}">IREMONT</a>
+				</li>
+				<div class="center-links d-flex">
+
+					<li class="nav-item">
+						<a th:href="@{/customer/showOption}" type="button" class="nav-link" aria-pressed="true">Wstecz</a>
+					</li>
+				</div>
+
+				<li class="nav-item logout-item">
+					<form name="logoutForm" th:action="@{/logout}" class="nav-link" method="post">
+						<input type="submit" class="nav-link" value="Wyloguj się"/>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<section class="user-update">
+	<div class="container">
+		<div class="workshop-form">
+			<!-- Registration Form -->
+			<form th:action="@{/customer/processUpdateForm}"
+				  th:object="${customerData}" method="POST"
+				  class="form-horizontal">
+				<legend class="form-legend">Zmień dane osobowe</legend>
+				<!-- Place for messages: error, alert etc ... -->
+				<div class="form-group">
+					<div class="col-xs-15">
+						<div>
+
+							<!-- Check for registration error -->
+							<div th:if="${updateError}" class="alert alert-danger col-xs-offset-1 col-xs-10">
+								<span th:text="${updateError}"></span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<!-- Old User name and Old Email-->
+				<input type="hidden" th:value="${oldUsername}" name="oldUsername">
+
+				<input type="hidden" th:value="${oldEmail}" name="oldEmail">
+				<!-- User name -->
+				<div class="mb-3">
+					<label for="username" class="form-label">Nazwa użytkownika</label>
+					<input type="text" id="username" th:field="*{username}" placeholder="Nazwa użytkownika (*)" class="form-control" />
+				</div>
+
+				<div th:if="${#fields.hasErrors('username')}"
+					 style="margin-bottom: 25px" class="text-danger">
+					<ul>
+						<li th:each="err : ${#fields.errors('username')}" th:text="'Nazwa użytkownika ' + ${err}" />
+					</ul>
+				</div>
+
+				<!-- Password -->
+				<input type="hidden" th:field="*{password}">
+
+				<!-- Confirm Password -->
+				<input type="hidden" th:field="*{matchingPassword}">
+
+				<!-- First name -->
+				<div class="mb-3">
+					<label for="firstName" class="form-label">Imie</label>
+					<input type="text" id="firstName" th:field="*{firstName}" placeholder="Imie (*)" class="form-control" th:errorclass="fieldError" />
+				</div>
+				<div th:if="${#fields.hasErrors('firstName')}"
+					 style="margin-bottom: 25px" class="text-danger">
+					<ul>
+						<li th:each="err : ${#fields.errors('firstName')}" th:text="'Imie ' + ${err}" />
+					</ul>
+				</div>
+
+				<!-- Last name -->
+				<div class="mb-3">
+					<label for="lastName" class="form-label">Nazwisko</label>
+					<input type="text" id="lastName" th:field="*{lastName}" placeholder="Nazwisko (*)" class="form-control" th:errorclass="fieldError" />
+				</div>
+				<div th:if="${#fields.hasErrors('lastName')}"
+					 style="margin-bottom: 25px" class="text-danger">
+					<ul>
+						<li th:each="err : ${#fields.errors('lastName')}" th:text="'Nazwisko ' + ${err}" />
+					</ul>
+				</div>
+
+
+
+				<!-- Email -->
+				<div class="mb-3">
+					<label for="email" class="form-label">Email</label>
+					<input type="text" id="email" th:field="*{email}" placeholder="email (*)" class="form-control" th:errorclass="fieldError" />
+				</div>
+				<div th:if="${#fields.hasErrors('email')}"
+					 style="margin-bottom: 25px" class="text-danger">
+					<ul>
+						<li th:each="err : ${#fields.errors('email')}" th:text="'Email ' + ${err}" />
+					</ul>
+				</div>
+
+				<!-- Phone number -->
+				<div class="mb-3">
+					<label for="phoneNumber" class="form-label">Numer telefonu</label>
+					<input type="text" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Numer telefonu (*)" class="form-control" th:errorclass="fieldError" />
+				</div>
+				<div th:if="${#fields.hasErrors('phoneNumber')}"
+					 style="margin-bottom: 25px" class="text-danger">
+					<ul>
+						<li th:each="err : ${#fields.errors('phoneNumber')}" th:text="'Numer telefonu ' + ${err}" />
+					</ul>
+				</div>
+				<div class="d-flex justify-content-between">
+					<button type="submit" class="btn btn-secondary">Zapisz</button>
+					<a th:href="@{/customer/showChangePasswordForm}" class="btn btn-secondary" role="button" aria-pressed="true">Zmień hasło</a>
+					<!-- мапінг на контроллер з addCar  -->
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>

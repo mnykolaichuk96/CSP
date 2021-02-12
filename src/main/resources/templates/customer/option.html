@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>iremont.pl</title>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0 justify-content-between w-100">
+                <li class="nav-item">
+                    <a th:href="@{/customer/dashboard}" type="button" class="nav-link" aria-pressed="true">IREMONT</a>
+                </li>
+                <div class="center-links d-flex">
+                    <li class="nav-item">
+                        <a th:href="@{/customer/dashboard}" type="button" class="nav-link" aria-pressed="true">Wstecz</a>
+                        <!-- мапінг на контроллер з формаою реєстрації  -->
+                    </li>
+                </div>
+
+                <li class="nav-item logout-item">
+                    <form name="logoutForm" th:action="@{/logout}" class="nav-link" method="post">
+                        <input type="submit" class="nav-link" value="Wyloguj się"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Place for messages: error, alert etc ... -->
+<div class="form-group">
+    <div class="col-xs-15">
+        <div>
+
+            <!-- Check for registration error -->
+            <div th:if="${message}" class="alert alert-success col-xs-offset-1 col-xs-10">
+                <span th:text="${message}"></span>
+            </div>
+            <div th:if="${errorMessage}" class="alert alert-danger col-xs-offset-1 col-xs-10">
+                <span th:text="${errorMessage}"></span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<section class="user-page">
+    <div class="container">
+        <div class="user-page__content" th:object="${customerData}">
+            <div class="card">
+                <img src="../img/avatar.png" class="card-img-top" alt="avatar">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${customerData.username}"></h5>
+                    <a th:href="@{/customer/showOption}" class="btn btn-secondary" role="button" aria-pressed="true">Dane</a>
+                </div>
+            </div>
+            <div class="user-page__table">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Imie i Nazwisko </th>
+                        <td colspan="3"><span th:text="${customerData.firstName}"></span> <span th:text="${customerData.lastName}"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nazwa użytkownika</th>
+                        <td colspan="3" th:text="${customerData.username}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Numer telefonu</th>
+                        <td colspan="3" th:text="${customerData.phoneNumber}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td colspan="3" th:text="${customerData.email}"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-2"></td>
+                        <td class="col-2">
+                            <a th:href="@{/customer/showUpdateForm}" class="nav-link" role="button" aria-pressed="true">Zmień</a>
+                        </td>
+                        <td class="col-2">
+                            <a th:href="@{/customer/showChangePasswordForm}" class="nav-link" role="button" aria-pressed="true">Zmień hasło</a>
+                        </td>
+                        <td class="col-2">
+                            <a th:href="@{/customer/deleteAccount}" class="nav-link" role="button" aria-pressed="true">Usuń konto</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+

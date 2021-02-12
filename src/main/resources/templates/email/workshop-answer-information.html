@@ -165,7 +165,7 @@
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                             <td class="logo" style="text-align: center;">
-                                <h1>Welcome</h1>
+                                <h1>Dzień dobry, <span th:text="${customerDetailData.firstName}"/> <span th:text="${customerDetailData.firstName}"/>.</h1>
                             </td>
                         </tr>
                     </table>
@@ -177,19 +177,26 @@
                         <tr>
                             <td>
                                 <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                    <h2><span th:text="${orderAnswer.workshop.workshopName}"/> answer to you. For car
-                                        for car <span th:text="${orderAnswer.order.car.carModel.carMake.make}"/>
-                                        <span th:text="${orderAnswer.order.car.carModel.model}"/> <span th:text="${orderAnswer.order.car.registrationNumber}"/>
-                                        His price
-                                        <span th:text="${orderAnswer.price}"/> and implementation date <span th:text="${orderAnswer.implementationDate}"/>
-
-                                     phone number to workshop <span th:text="${orderAnswer.workshop.phoneNumber}"/> <br>
-                                     email <span th:text="${orderAnswer.workshop.email}"/><br>
-                                        address
-                                        <span th:text="${orderAnswer.workshop.city.cityName}"/><br>
-                                        <span th:text="${orderAnswer.workshop.address}"/>
-                                     to see more detail go to your order list</h2>
-                                    <p><a th:href="${showOrderListUrl}" class="btn btn-primary">Order List</a></p>
+                                    <h2>
+                                        Warsztat szmochodowy <span th:text="${workshopData.workshopName}"/> zaproponował ofertę do zlecenia od
+                                        <span th:text="${orderWorkshopData.creationDate}"/>.
+                                        <br>
+                                        Naprawę samochodu <span th:text="${orderWorkshopData.carData.registrationNumber}"/>,
+                                        oferuje zrealizować w terminie do <span th:text="${orderWorkshopData.orderAnswerData.implementationDate}"/>.
+                                        <br>
+                                        Cena: <span th:text="${orderWorkshopData.orderAnswerData.price}"/> zł.
+                                        Dane kontaktowe warsztatu samochodowego:
+                                        <br>
+                                        Numer telefonu: <span th:text="${workshopData.phoneNumber}"/>
+                                        <br>
+                                        Email: <span th:text="${workshopData.email}"/>
+                                        <br>
+                                        Adres: <span th:text="${workshopData.cityName}"/>, <span th:text="${workshopData.address}"/>.
+                                        <br>
+                                        <br>
+                                        Szeczególy oferty dostępne pod linkiem:
+                                    </h2>
+                                    <p><a th:href="${showOrderListUrl}" class="btn btn-primary">Lista zleceń</a></p>
                                 </div>
                             </td>
                         </tr>
