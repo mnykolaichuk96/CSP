@@ -2,10 +2,8 @@ package mnykolaichuk.prz.pracaDyplomowa.controller;
 
 import mnykolaichuk.prz.pracaDyplomowa.exception.InvalidTokenException;
 import mnykolaichuk.prz.pracaDyplomowa.model.entity.CustomerDetail;
-import mnykolaichuk.prz.pracaDyplomowa.service.CarService;
-import mnykolaichuk.prz.pracaDyplomowa.service.CustomerDetailService;
-import mnykolaichuk.prz.pracaDyplomowa.service.SecureTokenService;
-import mnykolaichuk.prz.pracaDyplomowa.service.WorkshopService;
+import mnykolaichuk.prz.pracaDyplomowa.model.entity.SecureToken;
+import mnykolaichuk.prz.pracaDyplomowa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -29,6 +27,9 @@ public class VerifyController {
 
     @Autowired
     private WorkshopService workshopService;
+
+    @Autowired
+    private OrderAnswerService orderAnswerService;
 
     @Autowired
     private SecureTokenService secureTokenService;
@@ -88,6 +89,23 @@ public class VerifyController {
         }
 
         redirAttr.addFlashAttribute("message", messageSource.getMessage("car.verification.success"
+                , null,LocaleContextHolder.getLocale()));
+        return REDIRECT_HOME;
+    }
+
+    @GetMapping("/offerChoose")
+    public String offerChoose(@RequestParam(required = false) String token, final Model model, RedirectAttributes redirAttr){
+        if(StringUtils.isEmpty(token)){
+            redirAttr.addFlashAttribute("errorMessage", messageSource.getMessage("user.registration.verification.missing.token"
+                    , null, LocaleContextHolder.getLocale()));
+            return REDIRECT_HOME;
+        }
+
+        SecureToken secureToken = secureTokenService.findByToken(token);
+        //orderAnswerId zapisany do pola verificationCarId tablicy secure_token
+        orderAnswerService.chooseOrderAnswerForImplementation(orderAnswerService.findById(secureToken.getVerificationCarId()));
+        secureTokenService.removeToken(secureToken);
+        redirAttr.addFlashAttribute("message", messageSource.getMessage("order.choose.success"
                 , null,LocaleContextHolder.getLocale()));
         return REDIRECT_HOME;
     }

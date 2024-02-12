@@ -22,7 +22,7 @@ public class Order {
     private LocalDateTime creationDate;
 
     @OneToMany(mappedBy = "order",
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH})
     private List<OrderAnswer> orderAnswers;
 

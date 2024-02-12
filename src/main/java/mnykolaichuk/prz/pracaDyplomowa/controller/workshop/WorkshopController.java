@@ -69,7 +69,8 @@ public class WorkshopController {
             , BindingResult bindingResult
             , @RequestParam("oldUsername") String oldUsername
             , @RequestParam("oldEmail") String oldEmail
-            , RedirectAttributes redirectAttributes) {
+            , RedirectAttributes redirectAttributes
+            , HttpServletRequest httpServletRequest) {
 
         if (bindingResult.hasErrors()) {
             return new ModelAndView("workshop/update-form");
@@ -104,6 +105,13 @@ public class WorkshopController {
                         , null, LocaleContextHolder.getLocale()));
             }
         }
+
+        try {
+            httpServletRequest.logout();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+
         return new ModelAndView(new RedirectView("/login"));
     }
 
@@ -182,11 +190,17 @@ public class WorkshopController {
     @GetMapping("/showCreatedOrderList")
     public String showCreatedOrderList(Model model
             , @CurrentSecurityContext(expression = "authentication.name") String username
-            , RedirectAttributes redirectAttributes) {
+            , RedirectAttributes redirectAttributes
+            , HttpServletRequest httpServletRequest) {
 
         if(workshopService.findByUsername(username) == null) {
             redirectAttributes.addFlashAttribute("errorMessage", messageSource.getMessage("user.not.logged",
                     null, LocaleContextHolder.getLocale()));
+            try {
+                httpServletRequest.logout();
+            } catch (ServletException e) {
+                e.printStackTrace();
+            }
             return "redirect:/login";
         }
 
@@ -212,6 +226,7 @@ public class WorkshopController {
             redirectAttributes.addFlashAttribute("orderAnswerData", orderAnswerData);
             return new ModelAndView(new RedirectView("showCreatedOrderList"));
         }
+
         orderAnswerService.createWorkshopAnswerByOrderAnswerData(orderAnswerData);
         return new ModelAndView(new RedirectView("showCreatedOrderList"));
     }
@@ -227,11 +242,17 @@ public class WorkshopController {
     @GetMapping("/showImplementationOrderList")
     public String showImplementationOrderList(Model model
             , @CurrentSecurityContext(expression = "authentication.name") String username
-            , RedirectAttributes redirectAttributes) {
+            , RedirectAttributes redirectAttributes
+            , HttpServletRequest httpServletRequest) {
 
         if(workshopService.findByUsername(username) == null) {
             redirectAttributes.addFlashAttribute("errorMessage", messageSource.getMessage("user.not.logged",
                     null, LocaleContextHolder.getLocale()));
+            try {
+                httpServletRequest.logout();
+            } catch (ServletException e) {
+                e.printStackTrace();
+            }
             return "redirect:/login";
         }
 
@@ -256,7 +277,7 @@ public class WorkshopController {
     public ModelAndView processOrderCompleted(@RequestParam("orderAnswerId") Integer orderAnswerId) {
 
         orderAnswerService.chooseOrderAnswerForCompleted(orderAnswerService.findById(orderAnswerId));
-        return new ModelAndView(new RedirectView("showCreatedOrderList"));
+        return new ModelAndView(new RedirectView("showImplementationOrderList"));
     }
 
     @GetMapping("/showCompletedOrderList")

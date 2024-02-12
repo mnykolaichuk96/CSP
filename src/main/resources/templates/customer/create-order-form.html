@@ -43,7 +43,7 @@
             <div class="workshop-form">
                 <form th:action="@{/customer/processCreateOrder}"
                       th:object="${orderCustomerData}" method="POST">
-                    <legend class="form-legend">Samochód</legend>
+                    <legend class="form-legend">Nowe zlecenie</legend>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" th:object="${orderCustomerData.carData}" th:text="*{make}"></li>

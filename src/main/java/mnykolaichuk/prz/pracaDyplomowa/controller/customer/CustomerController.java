@@ -85,7 +85,8 @@ public class CustomerController {
             , BindingResult bindingResult
             , @ModelAttribute("oldUsername") String oldUsername
             , @ModelAttribute("oldEmail") String oldEmail
-            , RedirectAttributes redirectAttributes) {
+            , RedirectAttributes redirectAttributes
+            , HttpServletRequest httpServletRequest) {
 
         if (bindingResult.hasErrors()) {
             return new ModelAndView("customer/update-form");
@@ -121,6 +122,11 @@ public class CustomerController {
             }
         }
 
+        try {
+            httpServletRequest.logout();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
         return new ModelAndView(new RedirectView("/login"));
     }
 
@@ -347,7 +353,20 @@ public class CustomerController {
 
     @GetMapping("/showOrderList")
     public String showOrderList(Model model
-            , @CurrentSecurityContext(expression = "authentication.name") String username) {
+            , @CurrentSecurityContext(expression = "authentication.name") String username
+            , RedirectAttributes redirectAttributes
+            , HttpServletRequest httpServletRequest) {
+
+        if(customerService.findByUsername(username) == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", messageSource.getMessage("user.not.logged",
+                    null, LocaleContextHolder.getLocale()));
+            try {
+                httpServletRequest.logout();
+            } catch (ServletException e) {
+                e.printStackTrace();
+            }
+            return "redirect:/login";
+        }
 
         List<OrderCustomerData> orderCustomerDataList;
 
@@ -383,10 +402,17 @@ public class CustomerController {
     @GetMapping("/showCompletedOrderList")
     public String showCompletedOrderList(Model model
             , @CurrentSecurityContext(expression = "authentication.name") String username
-            , RedirectAttributes redirectAttributes) {
+            , RedirectAttributes redirectAttributes
+            , HttpServletRequest httpServletRequest) {
+
         if(customerService.findByUsername(username) == null) {
             redirectAttributes.addFlashAttribute("errorMessage", messageSource.getMessage("user.not.logged",
                     null, LocaleContextHolder.getLocale()));
+            try {
+                httpServletRequest.logout();
+            } catch (ServletException e) {
+                e.printStackTrace();
+            }
             return "redirect:/login";
         }
 

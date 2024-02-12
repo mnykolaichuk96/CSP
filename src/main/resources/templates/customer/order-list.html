@@ -90,6 +90,12 @@
                         <td th:text="${orderCustomerDataIterator.carData.registrationNumber}"/>
                         <td th:text="${orderCustomerDataIterator.creationDate}" style="min-width: 150px;"/>
                         <td class="descr" th:text="${orderCustomerDataIterator.description}"/>
+
+                        <div th:if="${orderCustomerDataIterator.orderAnswerDataList.get(0).stan.toString() == 'UNREGISTERED'}">
+                            <th/>
+                            <th/>
+                        </div>
+
                         <div th:case="'IMPLEMENTATION'">
                             <div th:if="${orderCustomerDataIterator.orderAnswerDataList.get(0).workshopData != null}">
                                 <td  th:text="${orderCustomerDataIterator.orderAnswerDataList.get(0).workshopData.workshopName}"/>

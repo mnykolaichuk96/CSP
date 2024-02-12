@@ -39,7 +39,7 @@ public class AdminController {
             , RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("errorMessage", model.getAttribute("errorMessage"));
 
-        return "redirect:/showAllCustomer";
+        return "redirect:/admin/showAllCustomer";
     }
 
     @GetMapping("/showAllCustomer")
@@ -47,7 +47,7 @@ public class AdminController {
 
         model.addAttribute("customerDataList", customerService.getAllCustomerDataList());
 
-        return "all-customer";
+        return "admin/all-customer";
     }
 
     @PostMapping("/deleteCustomer")

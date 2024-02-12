@@ -18,9 +18,6 @@ public class Customer {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "token")
-    private String token;
-
     @OneToOne
     @JoinColumn(name = "customer_detail_id")
     private CustomerDetail customerDetail;
@@ -63,14 +60,6 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public CustomerDetail getCustomerDetail() {

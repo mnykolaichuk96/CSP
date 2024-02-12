@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 @Repository
-public class CustomerCarRepositoryCustomImpl implements CustomerCarRepositoryCustom {
+public class  CustomerCarRepositoryCustomImpl implements CustomerCarRepositoryCustom {
 
     @Autowired
     private EntityManager entityManager;

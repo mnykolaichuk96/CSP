@@ -102,7 +102,7 @@
 
                                 <input type="hidden" th:value="${orderWorkshopDataIterator.orderAnswerId}" name="orderAnswerId"/>
 
-                                <div th:if="${orderWorkshopDataIterator.orderAnswerData.stan.toString() != 'UNREGISTERED'}">
+                                <div>
                                     <td style="max-width: 178px;">
                                         <!-- Implementation date -->
                                         <div>
@@ -134,19 +134,6 @@
                                     </td>
                                 </div>
                             </form>
-
-                            <div th:if="${orderWorkshopDataIterator.orderAnswerData.stan.toString() == 'UNREGISTERED'}">
-                                <td/>
-                                <td/>
-                                <td>
-                                    <div class="btns-wrapper">
-                                        <form th:action="@{/workshop/processOrderCompleted}" method="POST" class="form-horizontal">
-                                            <input type="hidden" th:value="${orderWorkshopDataIterator.orderAnswerId}" name="orderAnswerId"/>
-                                            <button type="submit" class="btn btn-secondary">Zrealizowany</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </div>
                             <td>
                                 <div class="btns-wrapper">
                                     <form th:action="@{/workshop/showCreatedOrderListOptions}" method="POST" class="form-horizontal">

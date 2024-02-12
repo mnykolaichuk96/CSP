@@ -47,7 +47,9 @@ public class PasswordController {
             return new ModelAndView("account/forgot-password-form").addObject("errorMessage", "is required");
         }
         try {
-            userAccountService.forgottenPassword(username);
+            if(!username.equals("admin")) {
+                userAccountService.forgottenPassword(username);
+            }
         } catch (UnknowIdentifierException e) {
 
         }

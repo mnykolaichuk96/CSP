@@ -122,7 +122,7 @@
 
                 <!-- Engine type -->
                 <select th:field="*{engineType}" class="form-select engine-type" aria-label="Default select example">
-                    <option th:each="i : ${T(com.mnykolaichuk.luv2code.springboot.thymeleafdemo.model.enums.EngineType).values()}"
+                    <option th:each="i : ${T(mnykolaichuk.prz.pracaDyplomowa.model.enums.EngineType).values()}"
                             th:value="${i}" th:text="${i.getPl()}"></option>
                 </select>
 

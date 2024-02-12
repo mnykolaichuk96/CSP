@@ -20,13 +20,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.task.TaskExecutor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -66,6 +65,10 @@ public class OrderServiceImpl implements OrderService {
     @Value("${site.base.url.http}")
     private String baseURL;
 
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
+    private final String createOrderTopic = "createOrder";
+
     @Override
     public void createOrder(String username, OrderCustomerData orderCustomerData) throws NullWorkshopInCityException {
         if(workshopService.findAllByCity(cityService.findByCityName(orderCustomerData.getCityName())).size() == 0) {
@@ -81,6 +84,7 @@ public class OrderServiceImpl implements OrderService {
             order.setCar(carService.saveForOrder(orderCustomerData.getCarData()));
 
             orderRepository.save(order);
+
             for (Workshop workshop : workshopService.findAllByCity(order.getCity())) {
                 OrderAnswer tempOrderAnswer = new OrderAnswer();
                 tempOrderAnswer.setStan(Stan.CREATED);
@@ -89,6 +93,27 @@ public class OrderServiceImpl implements OrderService {
                 orderAnswerService.save(tempOrderAnswer);
                 sendToWorkshopListCreateOrderInformationEmail(tempOrderAnswer);
             }
+
+            // Generate event new order
+            Map<String, String> messageData = new HashMap<>();
+            messageData.put("CarMake", order.getCar().getCarModel().getCarMake().getMake());
+            messageData.put("CarModel", order.getCar().getCarModel().getModel());
+            messageData.put("Year", order.getCar().getYear().toString());
+            messageData.put("Description", order.getDescription());
+
+            messageData.put("email", order.getCustomerDetail().getEmail());
+            messageData.put("PhoneNumber", order.getCustomerDetail().getPhoneNumber());
+
+            messageData.put("WorkshopEmailList",
+                    order.getCity().getWorkshops().stream()
+                            .map(Workshop::getEmail)
+                            .collect(Collectors.toList()).toString());
+            messageData.put("WorkshopPhoneNumberList",
+                    order.getCity().getWorkshops().stream()
+                            .map(Workshop::getPhoneNumber)
+                            .collect(Collectors.toList()).toString());
+
+            kafkaTemplate.send(createOrderTopic, messageData);
         }
     }
 
