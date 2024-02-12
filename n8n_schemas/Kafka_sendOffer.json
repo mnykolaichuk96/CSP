@@ -1,0 +1,182 @@
+{
+  "name": "Kafka sendOffer",
+  "nodes": [
+    {
+      "parameters": {
+        "topic": "sendOffer",
+        "groupId": "n8n-kafka",
+        "options": {
+          "jsonParseMessage": true
+        }
+      },
+      "name": "Kafka Trigger",
+      "type": "n8n-nodes-base.kafkaTrigger",
+      "position": [
+        -140,
+        460
+      ],
+      "typeVersion": 1,
+      "id": "9c3a8291-3e6d-4339-947d-08c1a6b79205",
+      "credentials": {
+        "kafka": {
+          "id": "yTqn4BweKisR9hdE",
+          "name": "Kafka account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "5854450473",
+        "text": "=Cześć, \nwłaśnie dodałem ofertę na naprawę {{ $json.message.CarRegistry }}. Naprawę wyceniam na:{{ $json.message.Price }}.\nPlanowana data końca naprawy: {{ $json.message.ImplementationDate }}.\nAdres naszego warsztatatu to: {{ $json.message.WorkshopAddress }}",
+        "additionalFields": {}
+      },
+      "id": "16adf851-da26-4806-90d3-e2dc52a17841",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        560,
+        400
+      ],
+      "alwaysOutputData": false,
+      "retryOnFail": true,
+      "credentials": {
+        "telegramApi": {
+          "id": "BtEHPLWnGyTWB5hg",
+          "name": "Telegram account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "topic": "={{ $('Kafka Trigger').item.json.topic +'SendConfirmation'}}",
+        "options": {}
+      },
+      "id": "29c1b27d-27ba-457c-a34a-6277222aa182",
+      "name": "Kafka",
+      "type": "n8n-nodes-base.kafka",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        500
+      ],
+      "credentials": {
+        "kafka": {
+          "id": "yTqn4BweKisR9hdE",
+          "name": "Kafka account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "n8n",
+        "to": "=+48695522001",
+        "message": "=Cześć, \nwłaśnie dodałem ofertę na naprawę {{ $json.message.CarRegistry }}. Naprawę wyceniam na:{{ $json.message.Price }}.\nPlanowana data końca naprawy: {{ $json.message.ImplementationDate }}.\nAdres naszego warsztatatu to: {{ $json.message.WorkshopAddress }}",
+        "additionalFields": {}
+      },
+      "id": "236f012f-1484-4361-bb5e-d6bc5bc9ed85",
+      "name": "Vonage",
+      "type": "n8n-nodes-base.vonage",
+      "typeVersion": 1,
+      "position": [
+        560,
+        240
+      ],
+      "credentials": {
+        "vonageApi": {
+          "id": "XwMIAaWIwz4Oxxbc",
+          "name": "Vonage account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "fromEmail": "jasiekdrabek@gmail.com",
+        "toEmail": "={{ $json.message.CustomerEmail;}}",
+        "subject": "={{ $json.topic }}",
+        "html": "=Cześć, \nwłaśnie dodałem ofertę na naprawę {{ $json.message.CarRegistry }}. Naprawę wyceniam na:{{ $json.message.Price }}.\nPlanowana data końca naprawy: {{ $json.message.ImplementationDate }}.\nAdres naszego warsztatatu to: {{ $json.message.WorkshopAddress }}",
+        "additionalFields": {}
+      },
+      "id": "f80e31db-71b5-4065-b346-1fdf1a287c52",
+      "name": "Mailjet",
+      "type": "n8n-nodes-base.mailjet",
+      "typeVersion": 1,
+      "position": [
+        560,
+        620
+      ],
+      "credentials": {
+        "mailjetEmailApi": {
+          "id": "uDxr4Ad1hmgNsMVx",
+          "name": "Mailjet Email account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Kafka Trigger": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Mailjet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram": {
+      "main": [
+        [
+          {
+            "node": "Kafka",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vonage": {
+      "main": [
+        [
+          {
+            "node": "Kafka",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mailjet": {
+      "main": [
+        [
+          {
+            "node": "Kafka",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2cdae9cf-6b69-4806-9364-087a6de04b5a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "02f7992ce6e9820f734160535632dfcfe33066913881d04c692c3bb53190023e"
+  },
+  "id": "25v7urgcwMoVHTqs",
+  "tags": []
+}

@@ -1,0 +1,182 @@
+{
+  "name": "Kafka choseOffer",
+  "nodes": [
+    {
+      "parameters": {
+        "topic": "choseOffer",
+        "groupId": "n8n-kafka",
+        "options": {
+          "jsonParseMessage": true
+        }
+      },
+      "name": "Kafka Trigger",
+      "type": "n8n-nodes-base.kafkaTrigger",
+      "position": [
+        -320,
+        440
+      ],
+      "typeVersion": 1,
+      "id": "a0850a14-964b-4ec7-a355-1c84106fb82f",
+      "credentials": {
+        "kafka": {
+          "id": "yTqn4BweKisR9hdE",
+          "name": "Kafka account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "5854450473",
+        "text": "=Cześć, \nprzyjmuję waszą ofertę na naprawę {{ $json.message.CarMake }} {{ $json.message.CarModel }} z {{ $json.message.Year }}. ",
+        "additionalFields": {}
+      },
+      "id": "d79cef13-c2e1-4e43-a0d0-a17939a225e5",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        380,
+        380
+      ],
+      "alwaysOutputData": false,
+      "retryOnFail": true,
+      "credentials": {
+        "telegramApi": {
+          "id": "BtEHPLWnGyTWB5hg",
+          "name": "Telegram account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "topic": "={{ $('Kafka Trigger').item.json.topic +'SendConfirmation'}}",
+        "options": {}
+      },
+      "id": "1f2faf80-84e7-4cba-8c8e-68b8ea38fa64",
+      "name": "Kafka",
+      "type": "n8n-nodes-base.kafka",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        480
+      ],
+      "credentials": {
+        "kafka": {
+          "id": "yTqn4BweKisR9hdE",
+          "name": "Kafka account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "n8n",
+        "to": "=+48695522001",
+        "message": "=Cześć, \nprzyjmuję waszą ofertę na naprawę {{ $json.message.CarMake }} {{ $json.message.CarModel }} z {{ $json.message.Year }}. ",
+        "additionalFields": {}
+      },
+      "id": "073a751b-e397-44c2-9ea3-1aa8857ce2e9",
+      "name": "Vonage",
+      "type": "n8n-nodes-base.vonage",
+      "typeVersion": 1,
+      "position": [
+        380,
+        220
+      ],
+      "credentials": {
+        "vonageApi": {
+          "id": "XwMIAaWIwz4Oxxbc",
+          "name": "Vonage account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "fromEmail": "jasiekdrabek@gmail.com",
+        "toEmail": "={{ $json.message.WorkshopEmail;}}",
+        "subject": "={{ $json.topic }}",
+        "html": "=Cześć, \nprzyjmuję waszą ofertę na naprawę {{ $json.message.CarMake }} {{ $json.message.CarModel }} z {{ $json.message.Year }}. ",
+        "additionalFields": {}
+      },
+      "id": "3f832229-b527-42b0-a2c5-488abcd75f7c",
+      "name": "Mailjet",
+      "type": "n8n-nodes-base.mailjet",
+      "typeVersion": 1,
+      "position": [
+        380,
+        600
+      ],
+      "credentials": {
+        "mailjetEmailApi": {
+          "id": "uDxr4Ad1hmgNsMVx",
+          "name": "Mailjet Email account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Kafka Trigger": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Mailjet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram": {
+      "main": [
+        [
+          {
+            "node": "Kafka",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vonage": {
+      "main": [
+        [
+          {
+            "node": "Kafka",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mailjet": {
+      "main": [
+        [
+          {
+            "node": "Kafka",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b196d9b1-9d90-4363-a75e-391e2c32c4e8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "02f7992ce6e9820f734160535632dfcfe33066913881d04c692c3bb53190023e"
+  },
+  "id": "xae71qMLVzOaGnfh",
+  "tags": []
+}
